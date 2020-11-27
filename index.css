@@ -1,0 +1,136 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: #333;
+  font-size: 1rem;
+  font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+}
+
+.txt-s {
+  font-size: 1.2rem;
+}
+
+.txt-m {
+  font-size: 1.4rem;
+}
+
+.txt-l {
+  font-size: 1.6rem;
+}
+
+.mb-s, .topic {
+  margin-bottom: 1rem;
+}
+
+.mb-m {
+  margin-bottom: 2rem;
+}
+
+.mb-l, .header {
+  margin-bottom: 4rem;
+}
+
+.content-width, .header__inner, .main__container {
+  max-width: 1200px;
+}
+
+.centered, .header {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.header {
+  width: 100%;
+  height: 120px;
+}
+
+.header__inner {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.header__inner .site-title {
+  display: block;
+}
+
+.main__container {
+  padding: 0 50px;
+}
+
+.main__top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-line-pack: end;
+      align-content: end;
+}
+
+.main__top-right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+
+.main__top-right .information {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.topic-name {
+  margin-right: 20px;
+}
+
+.input--normal {
+  width: 155px;
+  height: 25px;
+  border: 2px black solid;
+}
+
+.recipt__table {
+  border: #333 2px solid;
+}
+
+.row-number {
+  width: 30px;
+  text-align: center;
+}
+
+.topic {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 250px;
+}
+
+.topic-name {
+  -webkit-box-flex: 20%;
+      -ms-flex: 20%;
+          flex: 20%;
+}
+/*# sourceMappingURL=index.css.map */
