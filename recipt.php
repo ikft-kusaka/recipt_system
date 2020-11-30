@@ -1,26 +1,44 @@
+<?php
+require('dbconnect.php');
+
+// フォームが送信された場合
+if (!empty($_POST)) {
+  $today = date("Y-m-d H:i:s");
+  if ($_POST['settle-date'] > $today) {
+    $error['settle-date'] = 'greater';
+  }
+  if ($_POST['settle-date'] === '') {
+    $error['settle-date'] = 'blank';
+  }
+}
+
+?>
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>領収書入力システム</title>
-    <link rel="stylesheet" href="modern_css_reset.css" />
-    <link rel="stylesheet" href="index.css" />
-  </head>
-  <body>
-    <header class="header">
-      <div class="header__inner">
-        <h1 class="site-title">領収書入力</h1>
-      </div>
-    </header>
-    <main class="main">
-      <div class="main__container">
+<html lang="jp">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>領収書入力システム</title>
+  <link rel="stylesheet" href="modern_css_reset.css" />
+  <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+  <header class="header">
+    <div class="header__inner">
+      <h1 class="site-title">領収書入力</h1>
+    </div>
+  </header>
+  <main class="main">
+    <div class="main__container">
+      <form action="" method="post">
         <div class="main__top">
           <div class="main__top-left">
             <div class="topics__top">
               <div class="topic">
                 <span class="topic-name class">区分</span>
-                <select name="class__option" class="input--normal">
+                <select name="class" class="input--normal">
                   <option value="0">相殺</option>
                   <option value="1">一括</option>
                   <option value="2" selected>分割</option>
@@ -28,8 +46,14 @@
               </div>
               <div class="topic">
                 <span class="topic-name settle-date">領収日</span>
-                <input class="date__input input--normal" type="date" />
+                <input class="input input--normal" type="date" name="date" />
               </div>
+              <?php if ($error['settle-date'] === 'greater') : ?>
+                <p class="error">※本日より前の日付を入力してください。</p>
+              <?php endif ?>
+              <?php if ($error['settle-date'] === 'blank') : ?>
+                <p class="error">※日付を指定してください。</p>
+              <?php endif ?>
             </div>
           </div>
           <div class="main__top-right">
@@ -40,7 +64,7 @@
                 <span class="topic-name employee-name">稲畑ファインテック</span>
               </div>
             </div>
-            <input type="button" value="閉じる【F7】" />
+            <!-- <input type="button" value="閉じる【F7】" /> -->
           </div>
         </div>
         <div class="main__bottom">
@@ -117,7 +141,10 @@
             <td></td>
           </tr>
         </table>
-      </div>
-    </main>
-  </body>
+        <input type="submit" value="入力内容を確認する">
+      </form>
+    </div>
+  </main>
+</body>
+
 </html>
