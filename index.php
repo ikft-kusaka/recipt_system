@@ -27,7 +27,7 @@ if (!empty($_POST)) {
 <body>
   <header class="header">
     <div class="header__inner">
-      <h1 class="site-title">領収書入力</h1>
+      <h1 class="page-title">領収書入力</h1>
     </div>
   </header>
   <main class="main">
@@ -84,7 +84,7 @@ if (!empty($_POST)) {
             <input type="text" name="recipt-amount" class="input--normal" />
           </div>
         </div>
-        <table class="recipt__table" border="1" width="500" height="300">
+        <table class="recipt__table" border="5" width="500" height="300">
           <tr class="recipt__table__topic">
             <th class="recipt__table__title"></th>
             <th class="recipt__table__title">領収金額</th>

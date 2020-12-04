@@ -20,11 +20,11 @@ body {
   font-size: 1.6rem;
 }
 
-.mb-s, .topic {
+.mb-s, .user-id__area {
   margin-bottom: 1rem;
 }
 
-.mb-m {
+.mb-m, .user-password__area {
   margin-bottom: 2rem;
 }
 
@@ -37,7 +37,7 @@ body {
   min-width: 700px;
 }
 
-.centered, .header {
+.centered, .header, .login__form {
   margin: 0 auto;
   text-align: center;
 }
@@ -75,33 +75,11 @@ body {
   height: 50px;
 }
 
-.main__container {
-  padding: 0 50px;
+.main {
+  width: 100%;
 }
 
-.main__top {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -ms-flex-line-pack: end;
-      align-content: end;
-}
-
-.main__top-right {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -ms-flex-item-align: center;
-      align-self: center;
-}
-
-.main__top-right .information {
+.login__form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -109,46 +87,31 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+  padding-top: 50px;
 }
 
-.topic-name {
+.login__button {
+  display: block;
+}
+
+.user-id {
+  display: inline-block;
   margin-right: 20px;
 }
 
-.input--normal {
-  width: 155px;
-  height: 25px;
-  border: 2px black solid;
+.user-id__input {
+  display: inline-block;
 }
 
-.recipt__table {
-  border: #333 2px solid;
+.user-password {
+  display: inline-block;
+  margin-right: 20px;
 }
 
-.row-number {
-  width: 30px;
-  text-align: center;
+.user-password__input {
+  display: inline-block;
 }
-
-.topic {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 250px;
-}
-
-.topic-name {
-  -webkit-box-flex: 20%;
-      -ms-flex: 20%;
-          flex: 20%;
-}
-
-.recipt__table {
-  border: solid 2.5px black;
-  width: 500px;
-  height: 300px;
-}
-/*# sourceMappingURL=index.css.map */
+/*# sourceMappingURL=login.css.map */
