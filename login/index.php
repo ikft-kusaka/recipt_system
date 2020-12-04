@@ -14,7 +14,7 @@ if (!empty($_POST)) {
 }
 if (empty($error)) {
     // エラーがない場合、ログイン処理
-    $stmt = $db->prepare('SELECT user_id, password FROM user_mst WHERE user_id=? AND password=?');
+    $stmt = $db->prepare('SELECT user_id, password, authority FROM user_mst WHERE user_id=? AND password=?');
     $stmt->execute(array(
         $_POST['user-id'],
         $_POST['user-password']
@@ -25,7 +25,12 @@ if (empty($error)) {
     if ($rec > 0) {
         $_SESSION['user-id'] = $rec['user_id'];
         $_SESSION['user-password'] = $rec['password'];
-        header('Location: ../index.php');
+        // 管理者、一般で遷移先を分ける
+        if ($rec['authority'] === "0") {
+            header('Location: ../index.php');
+        } else {
+            header('Location: ../staff/staff_top.php');
+        }
     } else {
         $error['login'] = 'different';
     }

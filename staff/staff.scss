@@ -1,0 +1,45 @@
+@import "../common.scss";
+
+.main {
+  width: 100%;
+  &__container {
+    @extend .content-width;
+  }
+}
+
+.login {
+  &__form {
+    @extend .centered;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    // background-color: wheat;
+    padding-top: 50px;
+  }
+  &__button {
+    display: block;
+  }
+}
+
+.staff {
+  &-email {
+    display: inline-block;
+    margin-right: 20px;
+    &__input {
+      display: inline-block;
+    }
+    &__area {
+      @extend .mb-s;
+    }
+  }
+  &-password {
+    display: inline-block;
+    margin-right: 20px;
+    &__input {
+      display: inline-block;
+    }
+    &__area {
+      @extend .mb-m;
+    }
+  }
+}

@@ -1,0 +1,117 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: #333;
+  font-size: 1rem;
+  font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+}
+
+.txt-s {
+  font-size: 1.2rem;
+}
+
+.txt-m {
+  font-size: 1.4rem;
+}
+
+.txt-l {
+  font-size: 1.6rem;
+}
+
+.mb-s, .staff-email__area {
+  margin-bottom: 1rem;
+}
+
+.mb-m, .staff-password__area {
+  margin-bottom: 2rem;
+}
+
+.mb-l, .header {
+  margin-bottom: 4rem;
+}
+
+.content-width, .header__inner, .main__container {
+  max-width: 1200px;
+  min-width: 700px;
+}
+
+.centered, .header, .login__form {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.error-msg {
+  color: #fa2c2c;
+  margin-top: 20px;
+}
+
+.header {
+  width: 100%;
+  height: 120px;
+}
+
+.header__inner {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.header__inner .site-title {
+  display: block;
+}
+
+.btn {
+  display: block;
+  width: 100px;
+  height: 50px;
+}
+
+.main {
+  width: 100%;
+}
+
+.login__form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+  padding-top: 50px;
+}
+
+.login__button {
+  display: block;
+}
+
+.staff-email {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.staff-email__input {
+  display: inline-block;
+}
+
+.staff-password {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.staff-password__input {
+  display: inline-block;
+}
+/*# sourceMappingURL=staff_login.css.map */
