@@ -5,17 +5,29 @@ require('../dbconnect.php');
 // 入力チェック
 if (!empty($_POST)) {
     var_dump($_POST['employee-number']);
+    if ($_POST['user-first-name'] === '' || $_POST['user-last-name'] === '') {
+        $error['user-neme'] = 'blank';
+    }
     if ($_POST['user-email'] === '') {
         $error['user-email'] = 'blank';
     }
-    if (preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $_POST['user-email']) === 0) {
-        $error['user-email'] = 'unmatch';
-    }
+    // if (preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $_POST['user-email']) === 0) {
+    //     $error['user-email'] = 'unmatch';
+    // }
     if ($_POST['user-password'] === '') {
         $error['user-password'] = 'blank';
     }
     if ($_POST['user-password'] !== $_POST['user-password2']) {
         $error['user-password'] = 'different';
+    }
+    if ($_POST['employee-number'] === '') {
+        $error['employee-number'] = 'blank';
+    }
+    // if (preg_match('/^([0-9]{4})$/', $_POST['employee-number']) === 0) {
+    //     $error['employee-number'] = 'unmatch';
+    // }
+    if ($_POST['authority'] === '') {
+        $error['authority'] = 'blank';
     }
     if (empty($error)) {
         $_SESSION['add'] = $_POST;
@@ -45,6 +57,14 @@ if (!empty($_POST)) {
         <div class="main__container">
             <form action="" method="post">
                 <div class="login__form">
+                    <div class="user-name__area">
+                        <span class="user-name">姓名</span>
+                        <input type="text" class="user-first-name__input" name="user-first-name" value="<?php echo (htmlspecialchars($_POST['user-name'])) ?>" />
+                        <input type="text" class="user-last-name__input" name="user-last-name" value="<?php echo (htmlspecialchars($_POST['user-name'])) ?>" />
+                        <?php if ($error['user-name'] === 'blank') : ?>
+                            <p class="error-msg">*姓名を入力してください。</p>
+                        <?php endif ?>
+                    </div>
                     <div class="user-email__area">
                         <span class="user-email">メールアドレス</span>
                         <input type="text" class="user-email__input" name="user-email" value="<?php echo (htmlspecialchars($_POST['user-email'])) ?>" />
@@ -94,13 +114,13 @@ if (!empty($_POST)) {
                         <?php if ($error['authority'] === 'blank') : ?>
                             <p class="error-msg">管理者</p>
                         <?php endif ?>
-                        <?php if ($error['login'] === '') : ?>
-                            <p class="error-msg"></p>
-                        <?php endif ?>
                     </div>
                     <input class="add_btn btn" type="submit" value="登録">
                 </div>
             </form>
+        </div>
+        <div class="menu__btn btn">
+            <a href="staff_menu.php">管理メニューへ</a>
         </div>
     </main>
 </body>

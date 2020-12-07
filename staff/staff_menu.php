@@ -3,8 +3,8 @@
 // クリックに応じて遷移
 switch(true)
 {
-    case isset($_POST['user-disp']):
-        header('Location: user_disp.php');
+    case isset($_POST['user-list']):
+        header('Location: user_list.php');
     break;
     case isset($_POST['user-add']):
         header('Location: user_add.php');
@@ -35,7 +35,7 @@ switch(true)
     </header>
     <main class="main">
         <form class="staff__menu" action="" method="post">
-            <button type="submit" class="user_disp" name="user-disp">ユーザー一覧</button>
+            <button type="submit" class="user_list" name="user-list">ユーザー一覧</button>
             <button type="submit" class="user_add" name="user-add">ユーザー追加</button>
             <button type="submit" class="user_edit" name="user-edit">ユーザー編集</button>
             <button type="submit" class="user_delete" name="user-delete">ユーザー削除</button>
