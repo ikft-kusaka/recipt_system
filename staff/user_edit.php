@@ -32,19 +32,18 @@ if (!empty($_POST)) {
     if (empty($error)) {
         // 登録ボタンを押下した場合、確認画面へ遷移
         if(!empty($_POST['action'])) {
+            // 入力内容を上書き
             $_SESSION['edit'] = $_POST;
             header('Location: user_edit_check.php');
             exit();
         } else {
 
         }
-        var_dump($_SESSION['edit']);
-        var_dump($error);
     }
 }
 
 $stmt = $db->prepare('SELECT * FROM user_mst WHERE id=?');
-$stmt->execute(array($_POST['user-id']));
+$stmt->execute(array($_SESSION['edit']['id']));
 $rec = $stmt->fetch();
 
 ?>

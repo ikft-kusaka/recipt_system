@@ -8,8 +8,24 @@ if (!empty($_POST)) {
     if (empty($_POST['user-id'])) {
         $error['user-id'] = 'selected';
     }
-    var_dump($_POST['id']);
-    exit();
+
+    $stmt = $db->prepare('SELECT * FROM user_mst WHERE id=?');
+    $stmt->execute(array($_POST['user-id']));
+    $user = $stmt->fetch();
+    // クリックに応じて遷移
+    switch (true) {
+        case isset($_POST['user-add']):
+            header('Location: user_add.php');
+        break;
+        case isset($_POST['edit']):
+            $_SESSION['edit'] = $user;
+            header('Location: user_edit.php');
+        break;
+        case isset($_POST['delete']):
+            $_SESSION['delete'] = $user;
+            header('Location: user_delete.php');
+            break;
+    }
 }
 
 ?>
@@ -32,11 +48,11 @@ if (!empty($_POST)) {
     </header>
     <main class="main">
         <div class="main__container">
-            <form action="user_edit.php" method="post">
+            <form action="" method="post">
                 <input type="hidden">
-                <?php if($error['user-id'] === 'selected'): ?>
+                <?php if ($error['user-id'] === 'selected') : ?>
                     <p class="errror-msg">*ユーザーが選択されていません。</p>
-                    <?php endif ?>
+                <?php endif ?>
                 <table class="user__table">
                     <tr class="table__title">
                         <th class="table__content">ID</th>
@@ -47,7 +63,7 @@ if (!empty($_POST)) {
                     </tr>
                     <?php while ($rec = $recs->fetch()) : ?>
                         <tr>
-                            <td class="table__content user__id"><input type="radio" name="user-id" value="<?php  echo $rec['id'] ?>"></td>
+                            <td class="table__content user__id"><input type="radio" name="user-id" value="<?php echo $rec['id'] ?>"></td>
                             <td class="table__content first-name__cell"><?php echo htmlspecialchars($rec['first_name'], ENT_QUOTES) . " " . htmlspecialchars($rec['last_name'], ENT_QUOTES) ?></td>
                             <td class="table__content first-name__cell"><?php echo htmlspecialchars($rec['email'], ENT_QUOTES) ?></td>
                             <td class="table__content first-name__cell"><?php echo htmlspecialchars($rec['employee_number'], ENT_QUOTES) ?></td>
@@ -55,7 +71,8 @@ if (!empty($_POST)) {
                         </tr>
                     <?php endwhile ?>
                 </table>
-                <input type="submit" value="修正">
+                <input type="submit" value="修正" name="edit">
+                <input type="submit" value="削除" name="delete">
             </form>
         </div>
         <div class="menu__btn btn">
