@@ -1,6 +1,9 @@
 <?php
 session_start();
-require('../dbconnect.php');
+require_once('../common/dbconnect.php');
+require_once('../common/session_check.php');
+
+adminCheck($_SESSION);
 
 $recs = $db->query('SELECT * FROM user_mst');
 

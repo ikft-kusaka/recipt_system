@@ -1,7 +1,10 @@
 <?php
 session_start();
-require('../dbconnect.php');
+require_once('../common/dbconnect.php');
+require_once('../common/session_check.php');
 
+adminCheck($_SESSION);
+userEditCheck($_SESSION);
 
 // セッション変数を保持していない場合管理メニューへ
 if (!isset($_SESSION['edit'])) {

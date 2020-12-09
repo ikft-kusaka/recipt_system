@@ -1,43 +1,40 @@
 <?php
 session_start();
-require('../dbconnect.php');
+require_once('../common/dbconnect.php');
 
 // 入力チェック
 if (!empty($_POST)) {
-    if ($_POST['user-id'] === '') {
-        $error['user-id'] = 'blank';
+    if ($_POST['user-email'] === '') {
+        $error['user-email'] = 'blank';
     }
-
     if ($_POST['user-password'] === '') {
         $error['user-password'] = 'blank';
     }
-}
-if (empty($error)) {
-    // エラーがない場合、ログイン処理
-    $stmt = $db->prepare('SELECT user_id, password, authority FROM user_mst WHERE user_id=? AND password=?');
-    $stmt->execute(array(
-        $_POST['user-id'],
-        $_POST['user-password']
-    ));
-    $rec = $stmt->fetch();
-
-    // 該当データがあれば、領収書入力画面に遷移
-    if ($rec > 0) {
-        $_SESSION['user-id'] = $rec['user_id'];
-        $_SESSION['user-password'] = $rec['password'];
-        // 管理者、一般で遷移先を分ける
-        if ($rec['authority'] === "0") {
-            header('Location: ../index.php');
+    if (empty($error)) {
+        // エラーがない場合、ログイン処理
+        $stmt = $db->prepare('SELECT * FROM user_mst WHERE email=? AND password=?');
+        $stmt->execute(array(
+            $_POST['user-email'],
+            md5($_POST['user-password'])
+        ));
+        $rec = $stmt->fetch();
+        
+        // 該当データがあれば、一般もしくは管理者画面に遷移
+        if ($rec > 0) {
+            // 管理者、一般で遷移先を分ける
+            if ($rec['authority'] === "0") {
+                $_SESSION['general'] = $_POST;
+                header('Location: ../general/general_menu.php');
+            } else {
+                $_SESSION['admin'] = $_POST;
+                header('Location: ../staff/staff_top.php');
+            }
         } else {
-            header('Location: ../staff/staff_top.php');
+            $error['login'] = 'different';
         }
-    } else {
-        $error['login'] = 'different';
     }
+    var_dump($rec);
 }
-
-
-var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="jp">
@@ -59,12 +56,13 @@ var_dump($_SESSION);
     <main class="main">
         <div class="main__container">
             <form action="" method="post">
+                <input type="hidden">
                 <div class="login__form">
-                    <div class="user-id__area">
-                        <span class="user-id">ユーザーID</span>
-                        <input type="text" class="user-id__input" name="user-id" value="<?php echo (htmlspecialchars($_POST['user-id'])) ?>" />
-                        <?php if ($error['user-id']) : ?>
-                            <p class="error-msg">*ユーザーIDを入力してください。</p>
+                    <div class="user-email__area">
+                        <span class="user-email">メールアドレス</span>
+                        <input type="text" class="user-email__input" name="user-email" value="<?php echo (htmlspecialchars($_POST['user-email'])) ?>" />
+                        <?php if ($error['user-email']) : ?>
+                            <p class="error-msg">*メールアドレスを入力してください。</p>
                         <?php endif ?>
                     </div>
                     <div class="user-password__area">
@@ -74,7 +72,7 @@ var_dump($_SESSION);
                             <p class="error-msg">パスワードを入力してください</p>
                         <?php endif ?>
                         <?php if ($error['login'] === 'different') : ?>
-                            <p class="error-msg">ユーザーIDもしくはパスワードが異なります。</p>
+                            <p class="error-msg">メールアドレスもしくはパスワードが異なります。</p>
                         <?php endif ?>
                     </div>
                     <input class="login__button btn" type="submit" value="ログイン">

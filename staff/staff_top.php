@@ -1,4 +1,9 @@
 <?php
+session_start();
+require_once('../common/dbconnect.php');
+require_once('../common/session_check.php');
+
+adminCheck($_SESSION);
 
 if (!empty($_POST)) {
     // クリックで遷移先変更

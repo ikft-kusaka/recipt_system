@@ -1,6 +1,9 @@
 <?php
 session_start();
-require('../dbconnect.php');
+require_once('../common/dbconnect.php');
+require_once('../common/session_check.php');
+
+adminCheck($_SESSION);
 
 // 入力チェック
 if (!empty($_POST)) {
@@ -31,8 +34,9 @@ if (!empty($_POST)) {
     }
     if (empty($error)) {
         $_SESSION['add'] = $_POST;
+
+        // exit();
         header('Location: user_add_check.php');
-        exit();
     }
 }
 ?>

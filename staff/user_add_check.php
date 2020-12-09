@@ -1,22 +1,20 @@
 <?php
 session_start();
-require('../dbconnect.php');
+require_once('../common/dbconnect.php');
+require_once('../common/session_check.php');
 
+adminCheck($_SESSION);
 
-if (!isset($_SESSION['add'])) {
-    header('Location: staff_menu.php');
-    exit();
-}
+userAddCheck($_SESSION);
 
 if (!empty($_POST)) {
-    var_dump($_SESSION['add']);
     var_dump($_POST);
     $stmt = $db->prepare('INSERT INTO user_mst SET first_name=?, last_name=?, email=?, password=?, employee_number=?, authority=?, created_at=NOW(), updated_at=NOW()');
     $stmt->execute(array(
         $_SESSION['add']['user-first-name'],
         $_SESSION['add']['user-last-name'],
         $_SESSION['add']['user-email'],
-        sha1($_SESSION['add']['password']),
+        md5($_SESSION['add']['user-password']),
         $_SESSION['add']['employee-number'],
         $_SESSION['add']['authority'],
     ));
@@ -48,7 +46,7 @@ if (!empty($_POST)) {
         <div class="main__container">
             <p class="confirm-msg">登録内容は以下でよろしいですか？</p>
             <form action="" method="post">
-            <input type="hidden" name="action" value="submit" />
+                <input type="hidden" name="action" value="submit" />
                 <div class="login__form">
                     <div class="user-name__area">
                         <span class="user-name">姓名：</span>

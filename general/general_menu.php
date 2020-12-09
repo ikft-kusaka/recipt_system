@@ -1,5 +1,9 @@
 <?php
-    var_dump($_POST);
+session_start();
+require_once('../common/session_check.php');
+require_once('../common/logout.php');
+
+generalCheck($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +18,7 @@
 <body>
     <header class="header">
         <div class="header__inner">
-            <h1 class="page-title">メニュー</h1>
+            <h1 class="page-title">一般メニュー</h1>
         </div>
     </header>
     <main class="main">

@@ -1,5 +1,9 @@
 <?php
-require('dbconnect.php');
+session_start();
+require('./common/dbconnect.php');
+require_once('./common/session_check.php');
+
+generalCheck($_SESSION);
 
 // フォームが送信された場合
 if (!empty($_POST)) {
