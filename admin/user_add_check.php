@@ -19,7 +19,7 @@ if (!empty($_POST)) {
     ));
     // ユーザー追加の際に使用したセッションを破棄する
     unset($_SESSION['user-add']);
-    header('Location: staff_menu.php');
+    header('Location: admin_menu.php');
     exit();
 }
 
@@ -32,7 +32,7 @@ if (!empty($_POST)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ログイン</title>
     <link rel="stylesheet" href="../modern_css_reset.css">
-    <link rel="stylesheet" href="staff.css">
+    <link rel="stylesheet" href="admin.css">
 </head>
 
 <body>

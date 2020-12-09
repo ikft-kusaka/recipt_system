@@ -8,7 +8,7 @@ userEditCheck($_SESSION['user-edit']);
 
 // セッション変数を保持していない場合管理メニューへ
 if (!isset($_SESSION['user-edit'])) {
-    header('Location: staff_menu.php');
+    header('Location: admin_menu.php');
     exit();
 }
 
@@ -25,7 +25,7 @@ if (!empty($_POST)) {
     ));
     // ユーザー追加の際に使用したセッションを破棄する
     unset($_SESSION['edit']);
-    header('Location: staff_menu.php');
+    header('Location: admin_menu.php');
     exit();
 }
 
@@ -38,7 +38,7 @@ if (!empty($_POST)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>管理者</title>
     <link rel="stylesheet" href="../modern_css_reset.css">
-    <link rel="stylesheet" href="staff.css">
+    <link rel="stylesheet" href="admin.css">
 </head>
 
 <body>

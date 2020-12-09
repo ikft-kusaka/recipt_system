@@ -27,7 +27,7 @@ if (!empty($_POST)) {
         </div>
     </header>
     <main class="main">
-        <form class="staff__menu" action="" method="post">
+        <form class="admin__menu" action="" method="post">
             <button type="submit" class="user_list" name="user-list">ユーザー一覧</button>
             <button type="submit" class="user_add" name="user-add">ユーザー追加</button>
             <button type="submit" class="general_menu" name="general-menu">一般メニュー</button>

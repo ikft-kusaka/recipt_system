@@ -20,11 +20,11 @@ body {
   font-size: 1.6rem;
 }
 
-.mb-s, .staff-email__area {
+.mb-s, .admin-email__area {
   margin-bottom: 1rem;
 }
 
-.mb-m, .staff-password__area {
+.mb-m, .admin-password__area {
   margin-bottom: 2rem;
 }
 
@@ -98,21 +98,21 @@ body {
   display: block;
 }
 
-.staff-email {
+.admin-email {
   display: inline-block;
   margin-right: 20px;
 }
 
-.staff-email__input {
+.admin-email__input {
   display: inline-block;
 }
 
-.staff-password {
+.admin-password {
   display: inline-block;
   margin-right: 20px;
 }
 
-.staff-password__input {
+.admin-password__input {
   display: inline-block;
 }
 
@@ -181,4 +181,4 @@ table tr:last-child td:last-child {
 .main {
   background-color: #a8b7c5;
 }
-/*# sourceMappingURL=staff.css.map */
+/*# sourceMappingURL=admin.css.map */

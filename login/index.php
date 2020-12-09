@@ -23,7 +23,7 @@ if (!empty($_POST)) {
                 header('Location: ../general/general_menu.php');
             } else {
                 $_SESSION['admin'] = $_POST;
-                header('Location: ../staff/staff_top.php');
+                header('Location: ../admin/admin_top.php');
             }
         } else {
             $error['login'] = 'different';

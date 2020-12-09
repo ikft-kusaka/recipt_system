@@ -21,7 +21,7 @@ function adminCheck($sessionAdmin)
 function userAddCheck($sessionAdd)
 {
     if (empty($sessionAdd)) {
-        header('Location: ../staff/user_menu.php');
+        header('Location: ../admin/user_menu.php');
         exit();
     }
 }
@@ -37,7 +37,7 @@ function userEditCheck($sessionEdit)
 function userDeleteCheck($sessionDelete)
 {
     if (empty($sessionDelete)) {
-        header('Location: ../staff/user_menu.php');
+        header('Location: ../admin/user_menu.php');
         exit();
     }
 }

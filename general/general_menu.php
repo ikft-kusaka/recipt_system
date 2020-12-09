@@ -22,7 +22,7 @@ generalCheck($_SESSION['general'], $_SESSION['admin']);
         </div>
     </header>
     <main class="main">
-        <form class="staff__menu" action="" method="post">
+        <form class="admin__menu" action="" method="post">
             <button type="submit" class="recipt-add__btn" name="user-add">領収書入力</button>
         </form>
     </main>

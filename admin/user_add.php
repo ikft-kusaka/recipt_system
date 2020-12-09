@@ -23,7 +23,7 @@ if (!empty($_POST)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ログイン</title>
     <link rel="stylesheet" href="../modern_css_reset.css">
-    <link rel="stylesheet" href="staff.css">
+    <link rel="stylesheet" href="admin.css">
 </head>
 
 <body>
@@ -99,7 +99,7 @@ if (!empty($_POST)) {
             </form>
         </div>
         <div class="menu__btn btn">
-            <a href="staff_menu.php">管理メニューへ</a>
+            <a href="admin_menu.php">管理メニューへ</a>
         </div>
     </main>
 </body>
