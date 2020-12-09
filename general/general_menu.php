@@ -3,7 +3,7 @@ session_start();
 require_once('../common/session_check.php');
 require_once('../common/logout.php');
 
-generalCheck($_SESSION);
+generalCheck($_SESSION['general'], $_SESSION['admin']);
 ?>
 
 <!DOCTYPE html>
@@ -23,9 +23,7 @@ generalCheck($_SESSION);
     </header>
     <main class="main">
         <form class="staff__menu" action="" method="post">
-            <button type="submit" class="user_add" name="user-add">ユーザー追加</button>
-            <button type="submit" class="user_edit" name="user-edit">ユーザー編集</button>
-            <button type="submit" class="user_delete" name="user-delete">ユーザー削除</button>
+            <button type="submit" class="recipt-add__btn" name="user-add">領収書入力</button>
         </form>
     </main>
 </body>

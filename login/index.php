@@ -1,15 +1,11 @@
 <?php
 session_start();
 require_once('../common/dbconnect.php');
+require_once('../common/error_check.php');
 
 // 入力チェック
 if (!empty($_POST)) {
-    if ($_POST['user-email'] === '') {
-        $error['user-email'] = 'blank';
-    }
-    if ($_POST['user-password'] === '') {
-        $error['user-password'] = 'blank';
-    }
+    $error = userLoginErrorCheck($_POST);
     if (empty($error)) {
         // エラーがない場合、ログイン処理
         $stmt = $db->prepare('SELECT * FROM user_mst WHERE email=? AND password=?');
@@ -33,7 +29,6 @@ if (!empty($_POST)) {
             $error['login'] = 'different';
         }
     }
-    var_dump($rec);
 }
 ?>
 <!DOCTYPE html>

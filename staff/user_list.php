@@ -2,32 +2,20 @@
 session_start();
 require_once('../common/dbconnect.php');
 require_once('../common/session_check.php');
+require_once('../common/page_branch.php');
 
-adminCheck($_SESSION);
+adminCheck($_SESSION['admin']);
 
 $recs = $db->query('SELECT * FROM user_mst');
 
 if (!empty($_POST)) {
     if (empty($_POST['user-id'])) {
         $error['user-id'] = 'selected';
-    }
-
-    $stmt = $db->prepare('SELECT * FROM user_mst WHERE id=?');
-    $stmt->execute(array($_POST['user-id']));
-    $user = $stmt->fetch();
-    // クリックに応じて遷移
-    switch (true) {
-        case isset($_POST['user-add']):
-            header('Location: user_add.php');
-        break;
-        case isset($_POST['edit']):
-            $_SESSION['edit'] = $user;
-            header('Location: user_edit.php');
-        break;
-        case isset($_POST['delete']):
-            $_SESSION['delete'] = $user;
-            header('Location: user_delete.php');
-            break;
+    } else {
+        $stmt = $db->prepare('SELECT * FROM user_mst WHERE id=?');
+        $stmt->execute(array($_POST['user-id']));
+        $user = $stmt->fetch();
+        jumpPage($_POST, $user);
     }
 }
 
@@ -74,8 +62,9 @@ if (!empty($_POST)) {
                         </tr>
                     <?php endwhile ?>
                 </table>
-                <input type="submit" value="修正" name="edit">
-                <input type="submit" value="削除" name="delete">
+                <input type="submit" value="追加" name="user-add">
+                <input type="submit" value="修正" name="user-edit">
+                <input type="submit" value="削除" name="user-delete">
             </form>
         </div>
         <div class="menu__btn btn">

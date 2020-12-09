@@ -3,7 +3,7 @@ session_start();
 require('./common/dbconnect.php');
 require_once('./common/session_check.php');
 
-generalCheck($_SESSION);
+generalCheck($_SESSION['general'], $_SESSION['admin']);
 
 // フォームが送信された場合
 if (!empty($_POST)) {

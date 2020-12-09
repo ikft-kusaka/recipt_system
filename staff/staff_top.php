@@ -2,16 +2,12 @@
 session_start();
 require_once('../common/dbconnect.php');
 require_once('../common/session_check.php');
+require_once('../common/page_branch.php');
 
-adminCheck($_SESSION);
+adminCheck($_SESSION['admin']);
 
 if (!empty($_POST)) {
-    // クリックで遷移先変更
-    if(isset($_POST['staff-menu'])) {
-        header('Location: staff_menu.php');
-    } else {
-        header('Location: user_menu.php');
-    }
+    jumpPage($_POST);
 }
 ?>
 
@@ -33,7 +29,7 @@ if (!empty($_POST)) {
     <main class="main">
         <form class="staff__menu" action="" method="post">
             <button type="submit" class="staff__btn" name="staff-menu">管理メニューへ</button>
-            <button type="submit" class="user__btn" name="user-menu">通常メニューへ</button>
+            <button type="submit" class="general__btn" name="general-menu">通常メニューへ</button>
         </form>
     </main>
 </body>

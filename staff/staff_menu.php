@@ -2,24 +2,12 @@
 session_start();
 require_once('../common/dbconnect.php');
 require_once('../common/session_check.php');
+require_once('../common/page_branch.php');
 
-adminCheck($_SESSION);
+adminCheck($_SESSION['admin']);
 
-// クリックに応じて遷移
-switch(true)
-{
-    case isset($_POST['user-list']):
-        header('Location: user_list.php');
-    break;
-    case isset($_POST['user-add']):
-        header('Location: user_add.php');
-    break;
-    case isset($_POST['general-menu']):
-        header('Location: general_menu.php');
-    break;
-    case isset($_POST['logout']):
-        userLogout();
-    break;
+if (!empty($_POST)) {
+    jumpPage($_POST);
 }
 ?>
 

@@ -2,40 +2,15 @@
 session_start();
 require_once('../common/dbconnect.php');
 require_once('../common/session_check.php');
+require_once('../common/error_check.php');
 
 adminCheck($_SESSION);
 
 // 入力チェック
 if (!empty($_POST)) {
-    var_dump($_POST['employee-number']);
-    if ($_POST['user-first-name'] === '' || $_POST['user-last-name'] === '') {
-        $error['user-neme'] = 'blank';
-    }
-    if ($_POST['user-email'] === '') {
-        $error['user-email'] = 'blank';
-    }
-    // if (preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $_POST['user-email']) === 0) {
-    //     $error['user-email'] = 'unmatch';
-    // }
-    if ($_POST['user-password'] === '') {
-        $error['user-password'] = 'blank';
-    }
-    if ($_POST['user-password'] !== $_POST['user-password2']) {
-        $error['user-password'] = 'different';
-    }
-    if ($_POST['employee-number'] === '') {
-        $error['employee-number'] = 'blank';
-    }
-    // if (preg_match('/^([0-9]{4})$/', $_POST['employee-number']) === 0) {
-    //     $error['employee-number'] = 'unmatch';
-    // }
-    if ($_POST['authority'] === '') {
-        $error['authority'] = 'blank';
-    }
+    $error = userAddErrorCheck($_POST);
     if (empty($error)) {
-        $_SESSION['add'] = $_POST;
-
-        // exit();
+        $_SESSION['user-add'] = $_POST;
         header('Location: user_add_check.php');
     }
 }

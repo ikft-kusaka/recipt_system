@@ -2,18 +2,25 @@
 session_start();
 require_once('../common/dbconnect.php');
 require_once('../common/session_check.php');
+require_once('../common/Error_check.php');
 
-adminCheck($_SESSION);
+adminCheck($_SESSION['admin']);
 
-// 入力チェック
-if (!empty($_POST)) {
-    $stmt = $db->prepare('DELETE FROM user_mst WHERE id=?');
-    $stmt->execute(array($_SESSION['delete']['id']));
-    $_SESSION['delete'] = $stmt->fetch();
+// 削除ボタンを押下した場合、確認画面へ遷移
+if (!empty($_POST['action'])) {
+    // 入力チェック
+    if (!empty($_POST)) {
+        $stmt = $db->prepare('DELETE FROM user_mst WHERE id=?');
+        $stmt->execute(array($_SESSION['user-delete']['id']));
+        $_SESSION['user-delete'] = $stmt->fetch();
         // ユーザー削除の際に使用したセッションを破棄する
-        unset($_SESSION['delete']);
+        unset($_SESSION['user-delete']);
         header('Location: user_list.php');
         exit();
+    }
+    else {
+
+    }
 }
 
 ?>
@@ -39,23 +46,23 @@ if (!empty($_POST)) {
             <h2>以下のユーザーを削除します。</h2>
             <form action="" method="post">
                 <input type="hidden" name="action" value="submit">
-                <input type="hidden" name="user-id" value="<?php echo (htmlspecialchars($_SESSION['delete']['id'])) ?>>
+                <input type="hidden" name="user-id" value="<?php echo (htmlspecialchars($_SESSION['user-delete']['id'])) ?>>
                 <div class=" user-name__area">
                 <span class="user-name">姓名</span>
-                <span type="text" class="user-first-name__input" name="user-first-name" value=""><?php echo (htmlspecialchars($_SESSION['delete']['first_name'])) ?></span>
-                <span type="text" class="user-last-name__input" name="user-last-name" value=""><?php echo (htmlspecialchars($_SESSION['delete']['last_name'])) ?></span>
+                <span type="text" class="user-first-name__input" name="user-first-name" value=""><?php echo (htmlspecialchars($_SESSION['user-delete']['first_name'])) ?></span>
+                <span type="text" class="user-last-name__input" name="user-last-name" value=""><?php echo (htmlspecialchars($_SESSION['user-delete']['last_name'])) ?></span>
         </div>
         <div class="user-email__area">
             <span class="user-email">メールアドレス</span>
-            <span type="text" class="user-email__input" name="user-email" value=""><?php echo (htmlspecialchars($_SESSION['delete']['email'])) ?></span>
+            <span type="text" class="user-email__input" name="user-email" value=""><?php echo (htmlspecialchars($_SESSION['user-delete']['email'])) ?></span>
         </div>
         <div class="employee-number__area">
             <span class="employee-number">社員番号</span>
-            <span type="text" class="employee-number__input" name="employee-number" value=""><?php echo (htmlspecialchars($_SESSION['delete']['employee_number'])) ?></span>
+            <span type="text" class="employee-number__input" name="employee-number" value=""><?php echo (htmlspecialchars($_SESSION['user-delete']['employee_number'])) ?></span>
         </div>
         <div class="authority__area">
             <span class="authority">管理者権限</span>
-            <span name="authority" class="authority"><?php echo (htmlspecialchars($_SESSION['delete']['authority'])) ?>
+            <span name="authority" class="authority"><?php echo (htmlspecialchars($_SESSION['user-delete']['authority'])) ?>
             </span>
         </div>
         <input type="button" onclick="history.back()" value="戻る">

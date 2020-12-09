@@ -3,36 +3,40 @@ session_start();
 
 require_once('logout.php');
 
-function generalCheck($session)
+function generalCheck($sessionGeneral, $sessionAdmin)
 {
-    if (!empty($session['general']) || !empty($session['admin'])) {
+    if (!empty($sessionGeneral) || !empty($sessionAdmin)) {
+    } else {
         userLogout();
     }
 }
 
-function adminCheck($session)
+function adminCheck($sessionAdmin)
 {
-    if (empty($session['admin'])) {
+    if (empty($sessionAdmin)) {
         userLogout();
     }
 }
 
-function userAddCheck($session) {
-    if (empty($session['add'])) {
+function userAddCheck($sessionAdd)
+{
+    if (empty($sessionAdd)) {
         header('Location: ../staff/user_menu.php');
         exit();
     }
 }
 
-function userEditCheck($session) {
-    if (empty($session['edit'])) {
-        header('Location: ../staff/user_menu.php');
+function userEditCheck($sessionEdit)
+{
+    if (empty($sessionEdit)) {
+        header('Location: ../general/general_menu.php');
         exit();
     }
 }
 
-function userDeleteCheck($session) {
-    if (empty($session['delete'])) {
+function userDeleteCheck($sessionDelete)
+{
+    if (empty($sessionDelete)) {
         header('Location: ../staff/user_menu.php');
         exit();
     }
