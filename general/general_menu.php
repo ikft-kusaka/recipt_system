@@ -2,8 +2,14 @@
 session_start();
 require_once('../common/session_check.php');
 require_once('../common/logout.php');
+require_once('../common/page_branch.php');
 
 generalCheck($_SESSION['general'], $_SESSION['admin']);
+
+
+if (!empty($_POST)) {
+    jumpPage($_POST);
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,8 +28,9 @@ generalCheck($_SESSION['general'], $_SESSION['admin']);
         </div>
     </header>
     <main class="main">
-        <form class="admin__menu" action="" method="post">
-            <button type="submit" class="recipt-add__btn" name="user-add">領収書入力</button>
+        <form class="general__menu" action="" method="post">
+            <button type="submit" class="recipt-add__btn" name="recipt-add">領収書入力</button>
+            <button type="submit" class="logout__btn" name="logout">ログアウト</button>
         </form>
     </main>
 </body>

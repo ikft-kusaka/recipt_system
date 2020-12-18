@@ -1,6 +1,7 @@
 <?php
 function jumpPage($post, $user = null)
 {
+    // postに応じて遷移先を変更
     switch (true) {
         case isset($post['user-add']):
             header('Location: ../admin/user_add.php');
@@ -28,6 +29,8 @@ function jumpPage($post, $user = null)
         case isset($post['user-menu']):
             header('Location: ../admin/user_menu.php');
         break;
+        case isset($post['recipt-add']):
+            header('Location: ../recipt/recipt_add.php');
+        break;
     }
 }
-// クリックに応じて遷移

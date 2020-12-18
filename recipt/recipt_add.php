@@ -1,7 +1,7 @@
 <?php
 session_start();
-require('./common/dbconnect.php');
-require_once('./common/session_check.php');
+require('../common/dbconnect.php');
+require_once('../common/session_check.php');
 
 generalCheck($_SESSION['general'], $_SESSION['admin']);
 
@@ -16,6 +16,10 @@ if (!empty($_POST)) {
   }
 }
 
+function h($str)
+{
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="jp">
@@ -24,8 +28,8 @@ if (!empty($_POST)) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>領収書入力システム</title>
-  <link rel="stylesheet" href="modern_css_reset.css" />
-  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="../stylesheet/modern_css_reset.css" />
+  <link rel="stylesheet" href="../stylesheet/recipt.css" />
 </head>
 
 <body>
@@ -41,7 +45,7 @@ if (!empty($_POST)) {
           <div class="main__top-left">
             <div class="topics__top">
               <div class="topic">
-                <span class="topic-name class">区分</span>
+                <span class="topic-name classification">区分</span>
                 <select name="class" class="input--normal">
                   <option value="0">相殺</option>
                   <option value="1">一括</option>
@@ -74,18 +78,20 @@ if (!empty($_POST)) {
         <div class="main__bottom">
           <div class="topic">
             <span class="topic-name tax-rate">税率</span>
-            <select name="tax-rate" class="input--normal">
-              <option value="0">10.0%</option>
+            <select name="tax-rate" class="tax-rate input--normal" id="tax-rate">
+              <option value="0" selected>10.0%</option>
               <option value="1">8.0%(軽減税率)</option>
-              <option value="2">5.0%</option>
             </select>
           </div>
           <div class="topic">
             <span class="topic-name custormer">得意先</span>
+            <input type="text" class="customer">
+            <input type="submit" name="customer-jump" value="…">
           </div>
           <div class="topic">
             <span class="topic-name recipt-amount">領収金額</span>
-            <input type="text" name="recipt-amount" class="input--normal" />
+            <input type="number" name="recipt-amount" class="input--normal" id="recipt-amount" />
+            <input type="submit" class="recipt__btn" id="recipt-btn">
           </div>
         </div>
         <table class="recipt__table" border="5" width="500" height="300">
@@ -96,59 +102,60 @@ if (!empty($_POST)) {
           </tr>
           <tr class="table__row">
             <td class="row-number">1</td>
-            <td></td>
-            <td></td>
+            <td class="recipt-amount-cell"></td>
+            <td class="implement-tax-cell"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">2</td>
-            <td></td>
-            <td></td>
+            <td class="recipt-amount-cell"></td>
+            <td class="implement-tax-cell"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">3</td>
-            <td></td>
-            <td></td>
+            <td class="recipt-amount-cell"></td>
+            <td class="implement-tax-cell"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">4</td>
-            <td></td>
-            <td></td>
+            <td class="recipt-amount-cell"></td>
+            <td class="implement-tax-cell"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">5</td>
-            <td></td>
-            <td></td>
+            <td class="recipt-amount-cell"></td>
+            <td class="implement-tax-cell"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">6</td>
-            <td></td>
-            <td></td>
+            <td class="recipt-amount-cell"></td>
+            <td class="implement-tax-cell"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">7</td>
-            <td></td>
-            <td></td>
+            <td class="recipt-amount-cell"></td>
+            <td class="implement-tax-cell"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">8</td>
-            <td></td>
-            <td></td>
+            <td class="recipt-amount-cell"></td>
+            <td class="implement-tax-cell"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">9</td>
-            <td></td>
-            <td></td>
+            <td class="recipt-amount-cell"></td>
+            <td class="implement-tax-cell"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">10</td>
-            <td></td>
-            <td></td>
+            <td class="recipt-amount-cell"></td>
+            <td class="implement-tax-cell"></td>
           </tr>
         </table>
         <input type="submit" value="入力内容を確認する">
       </form>
     </div>
   </main>
+  <script src="../javascript/recipt.js"></script>
 </body>
 
 </html>
