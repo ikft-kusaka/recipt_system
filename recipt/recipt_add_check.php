@@ -5,22 +5,39 @@ require_once('../common/session_check.php');
 
 generalCheck($_SESSION['general'], $_SESSION['admin']);
 
+if (!empty($_SESSION['admin'])) {
+  $userId = $_SESSION['admin']['employee_number'];
+  $userName .= $_SESSION['admin']['first_name'];
+  $userName .= $_SESSION['admin']['last_name'];
+} else {
+  $userId = $_SESSION['general']['employee_number'];
+  $userName .= $_SESSION['general']['first_name'];
+  $userName .= $_SESSION['general']['last_name'];
+}
+
+var_dump($userId, $userName);
+
 // フォームが送信された場合
 if (!empty($_POST)) {
-  $today = date("Y-m-d H:i:s");
-  if ($_POST['recipt-date'] > $today) {
-    $error['recipt-date'] = 'greater';
-  }
-  if ($_POST['recipt-date'] === '') {
-    $error['recipt-date'] = 'blank';
-  }
-  if (empty($error)) {
-    // var_dump($_POST['total-recipt-amount']);
-    // exit();
-    $_SESSION['recipt-add'] = $_POST;
-    header('Location: recipt_add_check.php');
-    exit();
-  }
+  $stmt = $db->prepare(
+    "INSERT INTO recipt SET 
+    classification=?, recipt_date=?, tax_rate=?, 
+    customer_code=?, total_recipt_amount=?, recipt_amount1=?,
+    comsumpition_tax1=?, stamp_duty1='0', cancel_classification='0',
+    user_id=?, created_at=NOW(), creator=?,
+    updated_at=NOW(), updater=?");
+  $stmt->execute(array(
+    $_SESSION['recipt-add']['classification'],
+    $_SESSION['recipt-add']['recipt-date'],
+    $_SESSION['recipt-add']['tax-rate'],
+    $_SESSION['recipt-add']['customer-code'],
+    $_SESSION['recipt-add']['total-recipt-amount'],
+    $_SESSION['recipt-add']['recipt-amount-cell1'],
+    $_SESSION['recipt-add']['comsumpition-tax-cell1'],
+    $userId,
+    $userName,
+    $userName,
+  ));
 }
 
 ?>
@@ -30,7 +47,7 @@ if (!empty($_POST)) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>領収書入力システム</title>
+  <title>領収書入力システムチェック</title>
   <link rel="stylesheet" href="../stylesheet/modern_css_reset.css" />
   <link rel="stylesheet" href="../stylesheet/recipt.css" />
 </head>
@@ -44,6 +61,7 @@ if (!empty($_POST)) {
   <main class="main">
     <div class="main__container">
       <form action="" method="post">
+        <input type="hidden" >
         <div class="main__top">
           <div class="main__top-left">
             <div class="topics__top">
@@ -59,12 +77,6 @@ if (!empty($_POST)) {
                 <span class="topic-name recipt-date">領収日</span>
                 <input class="input input--normal" type="date" name="recipt-date" />
               </div>
-              <?php if ($error['recipt-date'] === 'greater') : ?>
-                <p class="error">※本日より前の日付を入力してください。</p>
-              <?php endif ?>
-              <?php if ($error['recipt-date'] === 'blank') : ?>
-                <p class="error">※日付を指定してください。</p>
-              <?php endif ?>
             </div>
           </div>
           <div class="main__top-right">
@@ -109,61 +121,60 @@ if (!empty($_POST)) {
           </tr>
           <tr class="table__row">
             <td class="row-number">1</td>
-            <td><input class="recipt-amount-cell" type="number" name="recipt-amount-cell1" readonly></td>
-            <td><input class="comsumpition-tax-cell" type="number" name="comsumpition-tax-cell1" readonly></td>
+            <td class="recipt-amount-cell" name="recipt-amount-cell1"></td>
+            <td class="implement-tax-cell" name="implement-tax-cell1"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">2</td>
-            <td><input class="recipt-amount-cell" type="number" name="recipt-amount-cell2" readonly></td>
-            <td><input class="comsumpition-tax-cell" type="number" name="comsumpition-tax-cell2" readonly></td>
+            <td class="recipt-amount-cell" name="recipt-amount-cell2"></td>
+            <td class="implement-tax-cell" name="implement-tax-cell2"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">3</td>
-            <td><input class="recipt-amount-cell" type="number" name="recipt-amount-cell3" readonly></td>
-            <td><input class="comsumpition-tax-cell" type="number" name="comsumpition-tax-cell3" readonly></td>
+            <td class="recipt-amount-cell" name="recipt-amount-cell3"></td>
+            <td class="implement-tax-cell" name="implement-tax-cell3"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">4</td>
-            <td><input class="recipt-amount-cell" type="number" name="recipt-amount-cell4" readonly></td>
-            <td><input class="comsumpition-tax-cell" type="number" name="comsumpition-tax-cell4" readonly></td>
+            <td class="recipt-amount-cell" name="recipt-amount-cell4"></td>
+            <td class="implement-tax-cell" name="implement-tax-cell4"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">5</td>
-            <td><input class="recipt-amount-cell" type="number" name="recipt-amount-cell5" readonly></td>
-            <td><input class="comsumpition-tax-cell" type="number" name="comsumpition-tax-cell5" readonly></td>
+            <td class="recipt-amount-cell" name="recipt-amount-cell5"></td>
+            <td class="implement-tax-cell" name="implement-tax-cell5"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">6</td>
-            <td><input class="recipt-amount-cell" type="number" name="recipt-amount-cell6" readonly></td>
-            <td><input class="comsumpition-tax-cell" type="number" name="comsumpition-tax-cell6" readonly></td>
+            <td class="recipt-amount-cell" name="recipt-amount-cell6"></td>
+            <td class="implement-tax-cell" name="implement-tax-cell6"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">7</td>
-            <td><input class="recipt-amount-cell" type="number" name="recipt-amount-cell7" readonly></td>
-            <td><input class="comsumpition-tax-cell" type="number" name="comsumpition-tax-cell7" readonly></td>
+            <td class="recipt-amount-cell" name="recipt-amount-cell7"></td>
+            <td class="implement-tax-cell" name="implement-tax-cell7"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">8</td>
-            <td><input class="recipt-amount-cell" type="number" name="recipt-amount-cell8" readonly></td>
-            <td><input class="comsumpition-tax-cell" type="number" name="comsumpition-tax-cell8" readonly></td>
+            <td class="recipt-amount-cell" name="recipt-amount-cell8"></td>
+            <td class="implement-tax-cell" name="implement-tax-cell8"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">9</td>
-            <td><input class="recipt-amount-cell" type="number" name="recipt-amount-cell9" readonly></td>
-            <td class="" name=""><input class="comsumpition-tax-cell" type="number" name="comsumpition-tax-cell9" readonly></td>
+            <td class="recipt-amount-cell" name="recipt-amount-cell9"></td>
+            <td class="implement-tax-cell" name="implement-tax-cell9"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">10</td>
-            <td class="" name=""><input class="recipt-amount-cell" type="number" name="recipt-amount-cell10" readonly></td>
-            <td><input class="comsumpition-tax-cell" type="number" name="comsumpition-tax-cell10" readonly></td>
+            <td class="recipt-amount-cell" name="recipt-amount-cell10"></td>
+            <td class="implement-tax-cell" name="implement-tax-cell10"></td>
           </tr>
         </table>
-        <input type="hidden" id="total-recipt-amount" name="total-recipt-amount">
-        <input type="submit" value="入力内容を確認する" id="recipt-add-btn">
+        <input type="submit" value="DB登録">
       </form>
     </div>
   </main>
-  <script src="../javascript/recipt.js"></script>
+  <!-- <script src="../javascript/recipt.js"></script> -->
 </body>
 
 </html>
