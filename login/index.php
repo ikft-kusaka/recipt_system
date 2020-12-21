@@ -19,10 +19,10 @@ if (!empty($_POST)) {
         if ($rec > 0) {
             // 管理者、一般で遷移先を分ける
             if ($rec['authority'] === "0") {
-                $_SESSION['general'] = $_POST;
+                $_SESSION['general'] = $rec;
                 header('Location: ../general/general_menu.php');
             } else {
-                $_SESSION['admin'] = $_POST;
+                $_SESSION['admin'] = $rec;
                 header('Location: ../admin/admin_top.php');
             }
         } else {
