@@ -96,7 +96,7 @@ if (!empty($_POST)) {
             <input type="submit" name="customer-jump" value="…">
           </div>
           <div class="topic">
-            <span class="topic-name recipt-amount">領収金額</span>
+            <span class="topic-name">領収金額</span>
             <input type="number" name="recipt-amount" class="input--normal" id="recipt-amount" />
             <button type="" class="recipt__btn" id="recipt-btn">挿入</button>
           </div>
@@ -109,53 +109,53 @@ if (!empty($_POST)) {
           </tr>
           <tr class="table__row">
             <td class="row-number">1</td>
-            <td><input class="recipt-amount-cell" type="number" name="recipt-amount-cell1" readonly></td>
-            <td><input class="comsumpition-tax-cell" type="number" name="comsumpition-tax-cell1" readonly></td>
+            <td><input class="recipt-amount" type="number" name="recipt-amount1" readonly></td>
+            <td><input class="comsumpition-tax" type="number" name="comsumpition-tax1" readonly></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">2</td>
-            <td><input class="recipt-amount-cell" type="number" name="recipt-amount-cell2" readonly></td>
-            <td><input class="comsumpition-tax-cell" type="number" name="comsumpition-tax-cell2" readonly></td>
+            <td><input class="recipt-amount" type="number" name="recipt-amount2" readonly></td>
+            <td><input class="comsumpition-tax" type="number" name="comsumpition-tax2" readonly></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">3</td>
-            <td><input class="recipt-amount-cell" type="number" name="recipt-amount-cell3" readonly></td>
-            <td><input class="comsumpition-tax-cell" type="number" name="comsumpition-tax-cell3" readonly></td>
+            <td><input class="recipt-amount" type="number" name="recipt-amount3" readonly></td>
+            <td><input class="comsumpition-tax" type="number" name="comsumpition-tax3" readonly></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">4</td>
-            <td><input class="recipt-amount-cell" type="number" name="recipt-amount-cell4" readonly></td>
-            <td><input class="comsumpition-tax-cell" type="number" name="comsumpition-tax-cell4" readonly></td>
+            <td><input class="recipt-amount" type="number" name="recipt-amount4" readonly></td>
+            <td><input class="comsumpition-tax" type="number" name="comsumpition-tax4" readonly></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">5</td>
-            <td><input class="recipt-amount-cell" type="number" name="recipt-amount-cell5" readonly></td>
-            <td><input class="comsumpition-tax-cell" type="number" name="comsumpition-tax-cell5" readonly></td>
+            <td><input class="recipt-amount" type="number" name="recipt-amount5" readonly></td>
+            <td><input class="comsumpition-tax" type="number" name="comsumpition-tax5" readonly></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">6</td>
-            <td><input class="recipt-amount-cell" type="number" name="recipt-amount-cell6" readonly></td>
-            <td><input class="comsumpition-tax-cell" type="number" name="comsumpition-tax-cell6" readonly></td>
+            <td><input class="recipt-amount" type="number" name="recipt-amount6" readonly></td>
+            <td><input class="comsumpition-tax" type="number" name="comsumpition-tax6" readonly></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">7</td>
-            <td><input class="recipt-amount-cell" type="number" name="recipt-amount-cell7" readonly></td>
-            <td><input class="comsumpition-tax-cell" type="number" name="comsumpition-tax-cell7" readonly></td>
+            <td><input class="recipt-amount" type="number" name="recipt-amount7" readonly></td>
+            <td><input class="comsumpition-tax" type="number" name="comsumpition-tax7" readonly></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">8</td>
-            <td><input class="recipt-amount-cell" type="number" name="recipt-amount-cell8" readonly></td>
-            <td><input class="comsumpition-tax-cell" type="number" name="comsumpition-tax-cell8" readonly></td>
+            <td><input class="recipt-amount" type="number" name="recipt-amount8" readonly></td>
+            <td><input class="comsumpition-tax" type="number" name="comsumpition-tax8" readonly></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">9</td>
-            <td><input class="recipt-amount-cell" type="number" name="recipt-amount-cell9" readonly></td>
-            <td class="" name=""><input class="comsumpition-tax-cell" type="number" name="comsumpition-tax-cell9" readonly></td>
+            <td><input class="recipt-amount" type="number" name="recipt-amount9" readonly></td>
+            <td class="" name=""><input class="comsumpition-tax" type="number" name="comsumpition-tax9" readonly></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">10</td>
-            <td class="" name=""><input class="recipt-amount-cell" type="number" name="recipt-amount-cell10" readonly></td>
-            <td><input class="comsumpition-tax-cell" type="number" name="comsumpition-tax-cell10" readonly></td>
+            <td class="" name=""><input class="recipt-amount" type="number" name="recipt-amount10" readonly></td>
+            <td><input class="comsumpition-tax" type="number" name="comsumpition-tax10" readonly></td>
           </tr>
         </table>
         <input type="hidden" id="total-recipt-amount" name="total-recipt-amount">

@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const taxRate = document.getElementById("tax-rate");
   const recipt = document.getElementById("recipt-amount");
 
-  const reciptAmountCells = document.querySelectorAll(".recipt-amount-cell");
-  const comsumpitionTaxCells = document.querySelectorAll(".comsumpition-tax-cell");
+  const reciptAmounts = document.querySelectorAll(".recipt-amount");
+  const comsumpitionTaxs = document.querySelectorAll(".comsumpition-tax");
   const totalReciptAmount = document.getElementById("total-recipt-amount");
  
 
@@ -37,19 +37,19 @@ document.addEventListener("DOMContentLoaded", function () {
   // 税区分変更時に記入済みの領収金額を再計算
   const changeTaxRate = () => {
     if (taxRateBefore !== taxRate.value) {
-      for (const i of reciptAmountCells.keys()) {
-        if (reciptAmountCells[i].value !== "") {
+      for (const i of reciptAmounts.keys()) {
+        if (reciptAmounts[i].value !== "") {
           switch (taxRate.value) {
             case "0":
-              comTax = (reciptAmountCells[i].value / (100 + 10)) * 10;
+              comTax = (reciptAmounts[i].value / (100 + 10)) * 10;
               taxRateBefore = "0";
               break;
             case "1":
-              comTax = (reciptAmountCells[i].value / (100 + 8)) * 8;
+              comTax = (reciptAmounts[i].value / (100 + 8)) * 8;
               taxRateBefore = "1";
               break;
           }
-          comsumpitionTaxCells[i].value = Math.round(comTax);
+          comsumpitionTaxs[i].value = Math.round(comTax);
         }
       }
     }
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
   //総領収金額を計算する
   const caluculateTotalReciptAmount = () => {
     let totalAmount = 0;
-    reciptAmountCells.forEach(reciptAmount => {
+    reciptAmounts.forEach(reciptAmount => {
       totalAmount += Number(reciptAmount.value);
     });
     return parseInt(totalAmount, 10);
@@ -69,10 +69,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // 税区分に応じた消費税額を取得
     let comTax = caluculateTaxRate();
 
-    for (const i of reciptAmountCells.keys()) {
-      if (comsumpitionTaxCells[i].value === "") {
-        reciptAmountCells[i].value = recipt.value.toLocaleString();
-        comsumpitionTaxCells[i].value = comTax.toLocaleString();
+    for (const i of reciptAmounts.keys()) {
+      if (comsumpitionTaxs[i].value === "") {
+        reciptAmounts[i].value = recipt.value.toLocaleString();
+        comsumpitionTaxs[i].value = comTax.toLocaleString();
         break;
       }
     }

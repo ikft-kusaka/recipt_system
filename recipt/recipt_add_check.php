@@ -22,8 +22,18 @@ if (!empty($_POST)) {
   $stmt = $db->prepare(
     "INSERT INTO recipt SET 
     classification=?, recipt_date=?, tax_rate=?, 
-    customer_code=?, total_recipt_amount=?, recipt_amount1=?,
-    comsumpition_tax1=?, stamp_duty1='0', cancel_classification='0',
+    customer_code=?, total_recipt_amount=?, 
+    recipt_amount1=?, comsumpition_tax1=?, stamp_duty1='0',
+    recipt_amount2=?, comsumpition_tax2=?, stamp_duty2='0',
+    recipt_amount3=?, comsumpition_tax3=?, stamp_duty3='0',
+    recipt_amount4=?, comsumpition_tax4=?, stamp_duty4='0',
+    recipt_amount5=?, comsumpition_tax5=?, stamp_duty5='0',
+    recipt_amount6=?, comsumpition_tax6=?, stamp_duty6='0',
+    recipt_amount7=?, comsumpition_tax7=?, stamp_duty7='0',
+    recipt_amount8=?, comsumpition_tax8=?, stamp_duty8='0',
+    recipt_amount9=?, comsumpition_tax9=?, stamp_duty9='0',
+    recipt_amount10=?, comsumpition_tax10=?, stamp_duty10='0',
+    cancel_classification='0',
     user_id=?, created_at=NOW(), creator=?,
     updated_at=NOW(), updater=?");
   $stmt->execute(array(
@@ -32,8 +42,26 @@ if (!empty($_POST)) {
     $_SESSION['recipt-add']['tax-rate'],
     $_SESSION['recipt-add']['customer-code'],
     $_SESSION['recipt-add']['total-recipt-amount'],
-    $_SESSION['recipt-add']['recipt-amount-cell1'],
-    $_SESSION['recipt-add']['comsumpition-tax-cell1'],
+    $_SESSION['recipt-add']['recipt-amount1'],
+    $_SESSION['recipt-add']['comsumpition-tax1'],
+    $_SESSION['recipt-add']['recipt-amount2'],
+    $_SESSION['recipt-add']['comsumpition-tax2'],
+    $_SESSION['recipt-add']['recipt-amount3'],
+    $_SESSION['recipt-add']['comsumpition-tax3'],
+    $_SESSION['recipt-add']['recipt-amount4'],
+    $_SESSION['recipt-add']['comsumpition-tax4'],
+    $_SESSION['recipt-add']['recipt-amount5'],
+    $_SESSION['recipt-add']['comsumpition-tax5'],
+    $_SESSION['recipt-add']['recipt-amount6'],
+    $_SESSION['recipt-add']['comsumpition-tax6'],
+    $_SESSION['recipt-add']['recipt-amount7'],
+    $_SESSION['recipt-add']['comsumpition-tax7'],
+    $_SESSION['recipt-add']['recipt-amount8'],
+    $_SESSION['recipt-add']['comsumpition-tax8'],
+    $_SESSION['recipt-add']['recipt-amount9'],
+    $_SESSION['recipt-add']['comsumpition-tax9'],
+    $_SESSION['recipt-add']['recipt-amount10'],
+    $_SESSION['recipt-add']['comsumpition-tax10'],
     $userId,
     $userName,
     $userName,
@@ -108,7 +136,7 @@ if (!empty($_POST)) {
             <input type="submit" name="customer-jump" value="…">
           </div>
           <div class="topic">
-            <span class="topic-name recipt-amount">領収金額</span>
+            <span class="topic-name">領収金額</span>
             <input type="number" name="recipt-amount" class="input--normal" id="recipt-amount" />
             <button type="" class="recipt__btn" id="recipt-btn">挿入</button>
           </div>
@@ -121,53 +149,53 @@ if (!empty($_POST)) {
           </tr>
           <tr class="table__row">
             <td class="row-number">1</td>
-            <td class="recipt-amount-cell" name="recipt-amount-cell1"></td>
-            <td class="implement-tax-cell" name="implement-tax-cell1"></td>
+            <td class="recipt-amount" name="recipt-amount1"></td>
+            <td class="implement-tax" name="implement-tax1"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">2</td>
-            <td class="recipt-amount-cell" name="recipt-amount-cell2"></td>
-            <td class="implement-tax-cell" name="implement-tax-cell2"></td>
+            <td class="recipt-amount" name="recipt-amount2"></td>
+            <td class="implement-tax" name="implement-tax2"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">3</td>
-            <td class="recipt-amount-cell" name="recipt-amount-cell3"></td>
-            <td class="implement-tax-cell" name="implement-tax-cell3"></td>
+            <td class="recipt-amount" name="recipt-amount3"></td>
+            <td class="implement-tax" name="implement-tax3"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">4</td>
-            <td class="recipt-amount-cell" name="recipt-amount-cell4"></td>
-            <td class="implement-tax-cell" name="implement-tax-cell4"></td>
+            <td class="recipt-amount" name="recipt-amount4"></td>
+            <td class="implement-tax" name="implement-tax4"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">5</td>
-            <td class="recipt-amount-cell" name="recipt-amount-cell5"></td>
-            <td class="implement-tax-cell" name="implement-tax-cell5"></td>
+            <td class="recipt-amount" name="recipt-amount5"></td>
+            <td class="implement-tax" name="implement-tax5"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">6</td>
-            <td class="recipt-amount-cell" name="recipt-amount-cell6"></td>
-            <td class="implement-tax-cell" name="implement-tax-cell6"></td>
+            <td class="recipt-amount" name="recipt-amount6"></td>
+            <td class="implement-tax" name="implement-tax6"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">7</td>
-            <td class="recipt-amount-cell" name="recipt-amount-cell7"></td>
-            <td class="implement-tax-cell" name="implement-tax-cell7"></td>
+            <td class="recipt-amount" name="recipt-amount7"></td>
+            <td class="implement-tax" name="implement-tax7"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">8</td>
-            <td class="recipt-amount-cell" name="recipt-amount-cell8"></td>
-            <td class="implement-tax-cell" name="implement-tax-cell8"></td>
+            <td class="recipt-amount" name="recipt-amount8"></td>
+            <td class="implement-tax" name="implement-tax8"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">9</td>
-            <td class="recipt-amount-cell" name="recipt-amount-cell9"></td>
-            <td class="implement-tax-cell" name="implement-tax-cell9"></td>
+            <td class="recipt-amount" name="recipt-amount9"></td>
+            <td class="implement-tax" name="implement-tax9"></td>
           </tr>
           <tr class="table__row">
             <td class="row-number">10</td>
-            <td class="recipt-amount-cell" name="recipt-amount-cell10"></td>
-            <td class="implement-tax-cell" name="implement-tax-cell10"></td>
+            <td class="recipt-amount" name="recipt-amount10"></td>
+            <td class="implement-tax" name="implement-tax10"></td>
           </tr>
         </table>
         <input type="submit" value="DB登録">
