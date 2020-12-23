@@ -77,3 +77,31 @@ function userEditErrorCheck($post) {
         return $error;
     }
 }
+
+// 領収書入力エラーチェック
+function reciptAddErrorCheck($post) {
+    $today = date("Y-m-d H:i:s");
+    if ($post['recipt-date'] > $today) {
+      $error['recipt-date'] = 'greater';
+    }
+    if ($post['recipt-date'] === '') {
+      $error['recipt-date'] = 'blank';
+    }
+    if ($post['customer-code'] === '') {
+        $error['customer-code'] = 'blank';
+    }
+    if ($post['recipt-amount1'] === '' && $post['comsumpition-tax1'] === '') {
+        $error['recipt-amount'] = 'none';
+    }
+    for ($i=1; $i <= 10; $i++) { 
+        if($post["comsumpition-tax{$i}"] !== '') {
+            if ($post["recipt-amount{$i}"] === '') {
+                $error['recipt-amount'] = "blank";
+                break;
+            }
+        }
+    }
+    if(!empty($error)) {
+        return $error;
+    }
+}

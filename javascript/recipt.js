@@ -2,13 +2,16 @@ document.addEventListener("DOMContentLoaded", function () {
   const reciptBtn = document.getElementById("recipt-btn");
   const reciptAddBtn = document.getElementById("recipt-add-btn");
 
+  const classification = document.getElementById("classification");
+  const totalStampDuty = document.getElementById("total-stamp-duty");
+  const stampDuties = document.querySelectorAll(".stamp-duty");
+
   const taxRate = document.getElementById("tax-rate");
   const recipt = document.getElementById("recipt-amount");
 
   const reciptAmounts = document.querySelectorAll(".recipt-amount");
   const comsumpitionTaxs = document.querySelectorAll(".comsumpition-tax");
   const totalReciptAmount = document.getElementById("total-recipt-amount");
- 
 
   // 税区分を取得する
   let taxRateBefore = taxRate.value;
@@ -58,11 +61,11 @@ document.addEventListener("DOMContentLoaded", function () {
   //総領収金額を計算する
   const caluculateTotalReciptAmount = () => {
     let totalAmount = 0;
-    reciptAmounts.forEach(reciptAmount => {
+    reciptAmounts.forEach((reciptAmount) => {
       totalAmount += Number(reciptAmount.value);
     });
     return parseInt(totalAmount, 10);
-  }
+  };
 
   // ボタン押下時に入力した領収金額を表に追加する
   const displayRecipt = () => {
@@ -71,13 +74,64 @@ document.addEventListener("DOMContentLoaded", function () {
 
     for (const i of reciptAmounts.keys()) {
       if (comsumpitionTaxs[i].value === "") {
-        reciptAmounts[i].value = recipt.value.toLocaleString();
-        comsumpitionTaxs[i].value = comTax.toLocaleString();
+        reciptAmounts[i].value = recipt.value;
+        comsumpitionTaxs[i].value = comTax;
+        stampDuties[i].value = caluculateStampDuty(reciptAmounts[i].value);
         break;
       }
     }
   };
 
+  // 領収金額に応じて印紙税額計算
+  const caluculateStampDuty = (reciptAmount) => {
+    let stampDuty = 0;
+    if (reciptAmount < 50000) {
+      stampDuty = 0;
+    } else if (reciptAmount <= 1000000) {
+      stampDuty = 200;
+    } else if (reciptAmount <= 2000000) {
+      stampDuty = 400;
+    } else if (reciptAmount <= 3000000) {
+      stampDuty = 600;
+    } else if (reciptAmount <= 5000000) {
+      stampDuty = 1000;
+    } else if (reciptAmount <= 10000000) {
+      stampDuty = 2000;
+    } else if (reciptAmount <= 20000000) {
+      stampDuty = 40000;
+    } else if (reciptAmount <= 30000000) {
+      stampDuty = 6000;
+    } else if (reciptAmount <= 50000000) {
+      stampDuty = 10000;
+    } else if (reciptAmount <= 100000000) {
+      stampDuty = 20000;
+    } else if (reciptAmount <= 200000000) {
+      stampDuty = 40000;
+    } else if (reciptAmount <= 300000000) {
+      stampDuty = 60000;
+    } else if (reciptAmount <= 500000000) {
+      stampDuty = 100000;
+    } else if (reciptAmount <= 1000000000) {
+      stampDuty = 150000;
+    } else if (reciptAmount > 1000000000) {
+      stampDuty = 200000;
+    }
+    return stampDuty;
+  };
+
+  const classificationBranch = (classification, reciptAmount) => {
+    switch (classification.value) {
+      case "0" :
+        break;
+      case "1" :
+        break;
+      case "2" :
+        for (const i of stampDuties.keys()) {
+          stampDuties[i].value = caluculateStampDuty(reciptAmount);
+        }
+        break;
+    }
+  }
   reciptBtn.addEventListener("click", function (e) {
     e.preventDefault();
     displayRecipt();
@@ -87,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
     changeTaxRate();
   });
 
-  reciptAddBtn.addEventListener("click", function() {
+  reciptAddBtn.addEventListener("click", function () {
     totalReciptAmount.value = caluculateTotalReciptAmount();
   });
 });
