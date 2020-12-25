@@ -69,15 +69,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // ボタン押下時に入力した領収金額を表に追加する
   const displayRecipt = () => {
-    // 税区分に応じた消費税額を取得
-    let comTax = caluculateTaxRate();
+    if (recipt.value > 0) {
+      // 税区分に応じた消費税額を取得
+      let comTax = caluculateTaxRate();
 
-    for (const i of reciptAmounts.keys()) {
-      if (comsumpitionTaxs[i].value === "") {
-        reciptAmounts[i].value = recipt.value;
-        comsumpitionTaxs[i].value = comTax;
-        stampDuties[i].value = caluculateStampDuty(reciptAmounts[i].value);
-        break;
+      for (const i of reciptAmounts.keys()) {
+        if (comsumpitionTaxs[i].value === "") {
+          reciptAmounts[i].value = recipt.value;
+          comsumpitionTaxs[i].value = comTax;
+          stampDuties[i].value = caluculateStampDuty(reciptAmounts[i].value);
+          break;
+        }
       }
     }
   };
@@ -121,17 +123,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const classificationBranch = (classification, reciptAmount) => {
     switch (classification.value) {
-      case "0" :
+      case "0":
         break;
-      case "1" :
+      case "1":
         break;
-      case "2" :
+      case "2":
         for (const i of stampDuties.keys()) {
           stampDuties[i].value = caluculateStampDuty(reciptAmount);
         }
         break;
     }
-  }
+  };
   reciptBtn.addEventListener("click", function (e) {
     e.preventDefault();
     displayRecipt();

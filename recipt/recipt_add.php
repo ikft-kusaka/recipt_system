@@ -3,18 +3,22 @@ session_start();
 require('../common/dbconnect.php');
 require_once('../common/session_check.php');
 require_once('../common/error_check.php');
+require_once('../common/page_branch.php');
 
 generalCheck($_SESSION['general'], $_SESSION['admin']);
 
 // フォームが送信された場合
-if (!empty($_POST)) {
+if (!empty($_POST['customer-list'])) {
+  jumpPage($_POST);
+}
+if (!empty($_POST['recipt-add-check'])) {
   $error = reciptAddErrorCheck($_POST);
   if (empty($error)) {
-    $_SESSION['recipt-add'] = $_POST;
-    header('Location: recipt_add_check.php');
+    jumpPage($_POST);
     exit();
   }
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -88,13 +92,13 @@ if (!empty($_POST)) {
           <?php endif ?>
           <div class="topic">
             <span class="topic-name customer">得意先</span>
-            <input type="text" class="customer" name="customer-code" value="<?php echo (htmlspecialchars($_POST['customer-code'])) ?>">
-            <input type="submit" name="customer-jump" value="…">
+            <input type="text" class="customer" name="customer-code" value="<?php echo (htmlspecialchars($_SESSION['recipt-add']['customer-code'])) ?>">
+            <input type="submit" name="customer-list" value="検索" />
           </div>
           <div class="topic">
             <span class="topic-name">領収金額</span>
             <input type="number" name="recipt-amount" class="input--normal" id="recipt-amount" />
-            <button type="" class="recipt__btn" id="recipt-btn">挿入</button>
+            <input type="submit" class="recipt__btn" id="recipt-btn" />
           </div>
           <?php if ($error['recipt-amount'] === 'blank') : ?>
             <p class="error">※領収金額は1円以上の額を登録してください。</p>
@@ -112,16 +116,16 @@ if (!empty($_POST)) {
           <!-- 領収データ1~10まで表を作成 -->
           <?php for ($i = 1; $i <= 10; $i++) : ?>
             <tr class="table__row">
-            <td class="row-number"><?php echo $i ?></td>
-            <input type="hidden" class="stamp-duty" name="<?php echo "stamp-duty$i" ?>">
-            <td><input class="recipt-amount" type="number" name="<?php echo "recipt-amount$i" ?>" readonly></td>
-            <td><input class="comsumpition-tax" type="number" name="<?php echo "comsumpition-tax$i" ?>" readonly></td>
-          </tr>
+              <td class="row-number"><?php echo $i ?></td>
+              <input type="hidden" class="stamp-duty" name="<?php echo "stamp-duty$i" ?>">
+              <td><input class="recipt-amount" type="number" name="<?php echo "recipt-amount$i" ?>" readonly></td>
+              <td><input class="comsumpition-tax" type="number" name="<?php echo "comsumpition-tax$i" ?>" readonly></td>
+            </tr>
           <?php endfor ?>
         </table>
         <input type="hidden" id="total-recipt-amount" name="total-recipt-amount">
         <input type="hidden" id="total-stamp-duty" name="total-stamp-duty">
-        <input type="submit" value="入力内容を確認する" id="recipt-add-btn">
+        <button type="submit" value="入力内容を確認する" id="recipt-add-btn" name="recipt-add-check">入力内容を確認</button>
       </form>
     </div>
   </main>

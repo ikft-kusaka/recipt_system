@@ -4,4 +4,3 @@ try {
 } catch (PDOException $e) {
     echo '接続エラー： ' . $e->getMessage();
 }
-?>

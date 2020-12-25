@@ -5,7 +5,6 @@ require_once('../common/session_check.php');
 
 generalCheck($_SESSION['general'], $_SESSION['admin']);
 
-
 if (!empty($_SESSION['admin'])) {
   $userId = $_SESSION['admin']['employee_number'];
   $userName .= $_SESSION['admin']['first_name'];

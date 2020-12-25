@@ -15,7 +15,7 @@ function jumpPage($post, $user = null)
             header('Location: ../admin/user_delete.php');
             break;
         case isset($post['user-list']):
-            header('Location: ../admin/user_list.php');
+            header('Location: ../admin/user_list.php?page=1');
             break;
         case isset($post['general-menu']):
             header('Location: ../general/general_menu.php');
@@ -28,9 +28,17 @@ function jumpPage($post, $user = null)
             break;
         case isset($post['user-menu']):
             header('Location: ../admin/user_menu.php');
-        break;
+            break;
         case isset($post['recipt-add']):
+            $_SESSION['recipt-add'] = $post;
             header('Location: ../recipt/recipt_add.php');
-        break;
+            break;
+        case isset($post['recipt-add-check']):
+            $_SESSION['recipt-add'] = $post;
+            header('Location: recipt_add_check.php');
+            break;
+        case isset($post['customer-list']):
+            header('Location: ../customer/customer_list.php?page=1');
+            break;
     }
 }

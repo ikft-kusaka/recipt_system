@@ -6,11 +6,32 @@ require_once('../common/page_branch.php');
 
 adminCheck($_SESSION['admin']);
 
-$recs = $db->query('SELECT * FROM user_mst');
+$counts = $db->query('SELECT COUNT(*) as cnt FROM customer_mst');
+$count = $counts->fetch();
+$max_page = ceil($count['cnt'] / 20);
+
+if (isset($_REQUEST['page']) && is_numeric($_REQUEST['page'])) {
+    $page = $_REQUEST['page'];
+    $pageBefore = $page;
+} else {
+    $page = 1;
+}
+
+$page = $_REQUEST['page'];
+$start = 20 * ($page - 1);
+
+// $recs = $db->query('SELECT * FROM user_mst');
+
+$stmt = $db->prepare('SELECT * FROM user_mst ORDER BY id ASC LIMIT ?, 20');
+$stmt->bindParam(1, $start, PDO::PARAM_INT);
+$stmt->execute();
+$recs = $stmt;
 
 if (!empty($_POST)) {
-    if (empty($_POST['user-id'])) {
-        $error['user-id'] = 'selected';
+    if (!empty($_POST['user-edit']) || !empty($_POST['user-edit'])) {
+        if (empty($_POST['user-id'])) {
+            $error['user-id'] = 'selected';
+        }
     } else {
         $stmt = $db->prepare('SELECT * FROM user_mst WHERE id=?');
         $stmt->execute(array($_POST['user-id']));
@@ -44,7 +65,7 @@ if (!empty($_POST)) {
                 <?php if ($error['user-id'] === 'selected') : ?>
                     <p class="errror-msg">*ユーザーが選択されていません。</p>
                 <?php endif ?>
-                <table class="user__table">
+                <table class="user__table" border="5">
                     <tr class="table__title">
                         <th class="table__content">ID</th>
                         <th class="table__content">氏名</th>
@@ -62,6 +83,15 @@ if (!empty($_POST)) {
                         </tr>
                     <?php endwhile ?>
                 </table>
+
+                <?php if ($page >= 2) : ?>
+                    <a href="user_list.php?page=<?php echo ($page - 1); ?>"><?php echo ($page - 1) ?>ページ目へ</a>
+                <?php endif; ?>
+
+                <?php if ($page < $max_page) : ?>
+                    <a href="user_list.php?page=<?php echo ($page + 1); ?>"><?php echo ($page + 1) ?>ページ目へ</a>
+                <?php endif; ?>
+
                 <input type="submit" value="追加" name="user-add">
                 <input type="submit" value="修正" name="user-edit">
                 <input type="submit" value="削除" name="user-delete">
